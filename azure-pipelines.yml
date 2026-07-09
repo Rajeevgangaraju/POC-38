@@ -5,6 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
 - task: AzureKeyVault@2
   inputs:
     azureSubscription: 'Azureserviceconnection'
@@ -13,4 +14,11 @@ steps:
     RunAsPreJob: true
 
 - script: |
-    echo "Secret successfully retrieved from Key Vault"
+    echo "Before substitution"
+    cat appsettings.json
+
+    sed -i "s|__API_KEY__|$(ApiKey)|g" appsettings.json
+
+    echo "After substitution"
+    cat appsettings.json
+  displayName: 'Inject Key Vault Secret'
