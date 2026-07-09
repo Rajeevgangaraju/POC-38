@@ -1,0 +1,17 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Azureserviceconnection'
+    KeyVaultName: 'poc38-keyvault'
+    SecretsFilter: 'ApiKey'
+    RunAsPreJob: true
+
+- script: |
+    echo "Successfully fetched secret from Azure Key Vault"
