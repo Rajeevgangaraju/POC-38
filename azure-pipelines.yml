@@ -5,7 +5,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-
 - task: AzureKeyVault@2
   inputs:
     azureSubscription: 'Azureserviceconnection'
@@ -14,4 +13,4 @@ steps:
     RunAsPreJob: true
 
 - script: |
-    echo "Successfully fetched secret from Azure Key Vault"
+    echo "Secret successfully retrieved from Key Vault"
